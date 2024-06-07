@@ -22,27 +22,42 @@ class MyApp extends StatelessWidget {
 
 class ButtonComparison extends StatelessWidget {
   void _showMaterialDialog(BuildContext context) {
-    showDatePicker(
-        context: context,
-        initialDate: DateTime.now(),
-        firstDate: DateTime(2000),
-        lastDate: DateTime(2101));
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Material Alert'),
+          content: const Text('This is a Material styled alert dialog.'),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 
   void _showCupertinoDialog(BuildContext context) {
-    showCupertinoModalPopup(
+    showCupertinoDialog(
       context: context,
-      builder: (_) => Container(
-        height: 500,
-        color: const Color.fromARGB(255, 255, 255, 255),
-        child: Column(children: [
-          SizedBox(
-            height: 400,
-            child: CupertinoDatePicker(
-                initialDateTime: DateTime.now(), onDateTimeChanged: (val) {}),
-          ),
-        ]),
-      ),
+      builder: (BuildContext context) {
+        return CupertinoAlertDialog(
+          title: const Text('Cupertino Alert'),
+          content: const Text('This is a Cupertino styled alert dialog.'),
+          actions: <Widget>[
+            CupertinoDialogAction(
+              child: const Text('OKI'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 
